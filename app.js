@@ -1,8 +1,8 @@
-const nodoo = require('./nodoo');
+const Nodoo = require('./nodoo');
 
 let url = 'http://localhost:8069';
 let db = 'odoo';
-const odoo = nodoo(url, db);
+const odoo = Nodoo(url, db);
 
 const playground = async () => {
   let res = await odoo.login('admin', 'admin');
