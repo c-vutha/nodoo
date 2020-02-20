@@ -1,11 +1,16 @@
-const Nodoo = require('./nodoo');
+const Nodoo = require("./nodoo");
 
+<<<<<<< HEAD
 let url = 'http://172.16.1.138:8069';
 let db = 'odoo12';
+=======
+let url = "http://localhost:8069";
+let db = "odoo12";
+>>>>>>> f6561bba457555ed48e62d08e466d263a964bb44
 const odoo = Nodoo(url, db);
 
 const playground = async () => {
-  let res = await odoo.login('admin', 'admin');
+  let res = await odoo.login("admin", "admin");
   //   console.log(res);
   res = await odoo.databases();
   //   console.log(res);
@@ -13,17 +18,35 @@ const playground = async () => {
   //   console.log(res);
   res = await odoo.serverInfo();
   //   console.log(res);
+<<<<<<< HEAD
   res = await odoo.searchRead('res.users', null, ['name', 'login', 'email']);
   // console.log(res);
   // res = await odoo.load('res.users', 2);
+=======
+  res = await odoo.searchRead("res.users", null, ["name", "login", "email"]);
+
+  res = await odoo.readGroup(
+    "hr.leave.report",
+    [["employee_id", "=", 1]],
+    ["employee_id", "number_of_days"],
+    ["employee_id", "holiday_status_id"],
+    null,
+    null,
+    null,
+    false
+  );
+  console.log(res);
+  res = await odoo.load("res.users", 2);
+>>>>>>> f6561bba457555ed48e62d08e466d263a964bb44
   //   console.log(res.login);
   const res_company = await odoo.search(
-    'res.partner',
-    [['is_company', '=', 'True']],
+    "res.partner",
+    [["is_company", "=", "True"]],
     {
       limit: 5
     }
   );
+<<<<<<< HEAD
   // console.log(res_company);
   res = await odoo.searchCount('res.partner', [['is_company', '=', 'True']]);
   // console.log(res);
@@ -50,6 +73,15 @@ const playground = async () => {
   // res = await odoo.write('hr.leave', [5], { name: 'Test Leaves' });
 
   // res = await odoo.unlink('hr.leave', [leave_id]);
+=======
+  console.log(res_company);
+  res = await odoo.searchCount("res.partner", [["is_company", "=", "True"]]);
+  console.log(res);
+  res = await odoo.read("res.partner", res_company, ["name"]);
+  console.log(res);
+  res = await odoo.fieldsGet("res.bank", ["string", "help", "type"]);
+  console.log(res);
+>>>>>>> f6561bba457555ed48e62d08e466d263a964bb44
   res = await odoo.logout();
   //   console.log(res);
 };
