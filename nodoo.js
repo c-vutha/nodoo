@@ -1,8 +1,8 @@
 const http = require('axios').default;
 const uuid = require('uuid').v4;
 
-let url = 'http://localhost:8069';
-let db = 'odoo';
+let url = 'http://172.16.1.138:8069';
+let db = 'odoo12';
 let options;
 let session;
 
@@ -46,6 +46,18 @@ const read = async (model, ids = [], fields = []) => {
 
 const fieldsGet = async (model, attributes = ['string', 'help', 'type']) => {
   return call_kw(model, 'fields_get', [], { attributes });
+};
+
+const create = async (model, values) => {
+  return call_kw(model, 'create', [values], {});
+};
+
+const write = async (model, ids, values) => {
+  return call_kw(model, 'update', [ids, values], {});
+};
+
+const unlink = async (model, ids) => {
+  return call_kw(model, 'unlink', [ids], {});
 };
 
 const call_kw = async (model, method, args = [], kwargs = {}) => {
@@ -182,9 +194,10 @@ const parseCookie = response => {
   return cookie;
 };
 
-module.exports = (url, db, options = null) => {
+module.exports = (url, db, session = null, options = { logging: true }) => {
   this.url = url;
   this.db = db;
+  this.session = session;
   this.options = options;
   return {
     login,
@@ -197,6 +210,10 @@ module.exports = (url, db, options = null) => {
     search,
     searchCount,
     read,
-    fieldsGet
+    fieldsGet,
+    create,
+    write,
+    unlink,
+    call_kw
   };
 };
