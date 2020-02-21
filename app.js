@@ -5,9 +5,11 @@ let db = 'odoo12';
 // let url = 'http://localhost:8069';
 // let db = 'odoo12';
 const odoo = Nodoo(url, db);
+const odoo2 = Nodoo(url, db);
 
 const playground = async () => {
   let res = await odoo.login('admin', 'admin');
+  let res2 = await odoo2.login('admin', 'admin');
   //   console.log(res);
   res = await odoo.databases();
   //   console.log(res);
